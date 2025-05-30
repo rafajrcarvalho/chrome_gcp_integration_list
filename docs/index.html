@@ -26,6 +26,60 @@
             padding: 20px;
         }
 
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 10px 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: #ccc;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: #3498db;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .lang-label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .lang-label.active {
+            color: #3498db;
+        }
+
         .header {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
@@ -146,6 +200,37 @@
             margin-right: 8px;
         }
 
+        .chrome-logo {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #ea4335, #4285f4, #34a853, #fbbc05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Language switching */
+        .lang-pt, .lang-en {
+            transition: opacity 0.3s ease;
+        }
+
+        .lang-en {
+            display: none;
+        }
+
+        body.lang-english .lang-pt {
+            display: none;
+        }
+
+        body.lang-english .lang-en {
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -162,132 +247,278 @@
             h2 {
                 font-size: 1.3em;
             }
-        }
 
-        .chrome-logo {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 20px;
-            background: linear-gradient(45deg, #ea4335, #4285f4, #34a853, #fbbc05);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
+            .language-toggle {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="language-toggle">
+        <span class="lang-label active" id="pt-label">PT</span>
+        <div class="toggle-switch" id="languageToggle">
+            <div class="toggle-slider"></div>
+        </div>
+        <span class="lang-label" id="en-label">EN</span>
+    </div>
+
     <div class="container">
         <div class="header">
             <div class="chrome-logo">🔧</div>
-            <h1>Política de Privacidade</h1>
-            <p><strong>Chrome Extension - GCP Integrations - Description Unchecker</strong></p>
+            <h1 class="lang-pt">Política de Privacidade</h1>
+            <h1 class="lang-en">Privacy Policy</h1>
+            <p class="lang-pt"><strong>Chrome Extension - GCP Integrations - Description Unchecker</strong></p>
+            <p class="lang-en"><strong>Chrome Extension - GCP Integrations - Description Unchecker</strong></p>
         </div>
 
         <div class="content">
-            <h2>🔒 1. Introdução</h2>
-            <p>Esta Política de Privacidade descreve como a extensão "GCP Integrations - Description Unchecker" coleta, usa e protege as informações quando você utiliza nossa extensão do Chrome.</p>
+            <!-- PORTUGUÊS -->
+            <div class="lang-pt">
+                <h2>🔒 1. Introdução</h2>
+                <p>Esta Política de Privacidade descreve como a extensão "GCP Integrations - Description Unchecker" coleta, usa e protege as informações quando você utiliza nossa extensão do Chrome.</p>
 
-            <h2>📊 2. Informações que Coletamos</h2>
-            
-            <h3>🚫 2.1 Dados NÃO Coletados</h3>
-            <div class="highlight">
-                <p><span class="no-data-icon">✅</span><strong>Nossa extensão NÃO coleta, armazena, transmite ou compartilha nenhum tipo de dados pessoais, incluindo:</strong></p>
+                <h2>📊 2. Informações que Coletamos</h2>
+                
+                <h3>🚫 2.1 Dados NÃO Coletados</h3>
+                <div class="highlight">
+                    <p><span class="no-data-icon">✅</span><strong>Nossa extensão NÃO coleta, armazena, transmite ou compartilha nenhum tipo de dados pessoais, incluindo:</strong></p>
+                    <ul>
+                        <li>Informações de identificação pessoal</li>
+                        <li>Dados de navegação</li>
+                        <li>Cookies</li>
+                        <li>Histórico de navegação</li>
+                        <li>Informações de login</li>
+                        <li>Dados de projetos do Google Cloud</li>
+                        <li>Qualquer informação de conteúdo das páginas visitadas</li>
+                    </ul>
+                </div>
+
+                <h3>💻 2.2 Funcionamento Local</h3>
+                <p>A extensão opera inteiramente no seu navegador local e não envia nenhuma informação para servidores externos.</p>
+
+                <h2>🔑 3. Permissões Utilizadas</h2>
+                
+                <h3>3.1 Permissão "scripting"</h3>
+                <p>Utilizada exclusivamente para executar o script de automação na página especificada.</p>
+
+                <h3>3.2 Permissão "host_permissions"</h3>
+                <p>Limitada apenas ao domínio: <code>https://console.cloud.google.com/integrations/list*</code></p>
+                <p>Esta permissão é necessária para que a extensão funcione apenas na página de integrações do Google Cloud Console.</p>
+
+                <h2>⚙️ 4. Funcionalidade da Extensão</h2>
+                <p>A extensão automatiza as seguintes ações na página de integrações do Google Cloud Console:</p>
                 <ul>
-                    <li>Informações de identificação pessoal</li>
-                    <li>Dados de navegação</li>
-                    <li>Cookies</li>
-                    <li>Histórico de navegação</li>
-                    <li>Informações de login</li>
-                    <li>Dados de projetos do Google Cloud</li>
-                    <li>Qualquer informação de conteúdo das páginas visitadas</li>
+                    <li>Clica no botão de opções de exibição de colunas</li>
+                    <li>Desmarca as colunas "Description" e "Last Modified By"</li>
+                    <li>Confirma as alterações</li>
                 </ul>
-            </div>
+                <p><strong>Todas essas ações são realizadas localmente no seu navegador, sem transmissão de dados.</strong></p>
 
-            <h3>💻 2.2 Funcionamento Local</h3>
-            <p>A extensão opera inteiramente no seu navegador local e não envia nenhuma informação para servidores externos.</p>
+                <h2>🌐 5. Uso de Dados de Terceiros</h2>
+                <div class="highlight">
+                    <p><strong>A extensão não utiliza:</strong></p>
+                    <ul>
+                        <li>Analytics ou ferramentas de rastreamento</li>
+                        <li>Serviços de terceiros</li>
+                        <li>APIs externas</li>
+                        <li>Conexões de rede</li>
+                    </ul>
+                </div>
 
-            <h2>🔑 3. Permissões Utilizadas</h2>
-            
-            <h3>3.1 Permissão "scripting"</h3>
-            <p>Utilizada exclusivamente para executar o script de automação na página especificada.</p>
-
-            <h3>3.2 Permissão "host_permissions"</h3>
-            <p>Limitada apenas ao domínio: <code>https://console.cloud.google.com/integrations/list*</code></p>
-            <p>Esta permissão é necessária para que a extensão funcione apenas na página de integrações do Google Cloud Console.</p>
-
-            <h2>⚙️ 4. Funcionalidade da Extensão</h2>
-            <p>A extensão automatiza as seguintes ações na página de integrações do Google Cloud Console:</p>
-            <ul>
-                <li>Clica no botão de opções de exibição de colunas</li>
-                <li>Desmarca as colunas "Description" e "Last Modified By"</li>
-                <li>Confirma as alterações</li>
-            </ul>
-            <p><strong>Todas essas ações são realizadas localmente no seu navegador, sem transmissão de dados.</strong></p>
-
-            <h2>🌐 5. Uso de Dados de Terceiros</h2>
-            <div class="highlight">
-                <p><strong>A extensão não utiliza:</strong></p>
+                <h2>💾 6. Armazenamento de Dados</h2>
+                <p><strong>A extensão não armazena nenhum dado:</strong></p>
                 <ul>
-                    <li>Analytics ou ferramentas de rastreamento</li>
-                    <li>Serviços de terceiros</li>
-                    <li>APIs externas</li>
-                    <li>Conexões de rede</li>
+                    <li>Não utiliza localStorage</li>
+                    <li>Não utiliza cookies</li>
+                    <li>Não mantém cache de dados</li>
+                    <li>Não possui banco de dados</li>
                 </ul>
-            </div>
 
-            <h2>💾 6. Armazenamento de Dados</h2>
-            <p><strong>A extensão não armazena nenhum dado:</strong></p>
-            <ul>
-                <li>Não utiliza localStorage</li>
-                <li>Não utiliza cookies</li>
-                <li>Não mantém cache de dados</li>
-                <li>Não possui banco de dados</li>
-            </ul>
+                <h2>🤝 7. Compartilhamento de Informações</h2>
+                <p>Não compartilhamos nenhuma informação porque não coletamos nenhum dado.</p>
 
-            <h2>🤝 7. Compartilhamento de Informações</h2>
-            <p>Não compartilhamos nenhuma informação porque não coletamos nenhum dado.</p>
+                <h2>🔐 8. Segurança</h2>
+                <p>A extensão é projetada com foco em privacidade:</p>
+                <div class="highlight">
+                    <ul>
+                        <li><span class="badge">Execução Local</span> Exclusivamente local</li>
+                        <li><span class="badge">Zero Transmissão</span> Sem transmissão de dados</li>
+                        <li><span class="badge">Acesso Limitado</span> Apenas página específica do Google Cloud Console</li>
+                        <li><span class="badge">Open Source</span> Código auditável</li>
+                    </ul>
+                </div>
 
-            <h2>🔐 8. Segurança</h2>
-            <p>A extensão é projetada com foco em privacidade:</p>
-            <div class="highlight">
+                <h2>📝 9. Alterações nesta Política</h2>
+                <p>Notificaremos sobre mudanças significativas nesta política através de uma atualização da extensão na Chrome Web Store.</p>
+
+                <h2>📧 10. Contato</h2>
+                <div class="contact-section">
+                    <p><strong>Para questões sobre esta Política de Privacidade, entre em contato através de:</strong></p>
+                    <p>📧 rafa17rocha@hotmail.com</p>
+                </div>
+
+                <h2>✅ 11. Conformidade</h2>
+                <p>Esta extensão está em conformidade com:</p>
                 <ul>
-                    <li><span class="badge">Execução Local</span> Exclusivamente local</li>
-                    <li><span class="badge">Zero Transmissão</span> Sem transmissão de dados</li>
-                    <li><span class="badge">Acesso Limitado</span> Apenas página específica do Google Cloud Console</li>
-                    <li><span class="badge">Open Source</span> Código auditável</li>
+                    <li>Políticas da Chrome Web Store</li>
+                    <li>Regulamentações de privacidade aplicáveis</li>
+                    <li>Termos de serviço do Google Cloud Console</li>
                 </ul>
+
+                <div class="summary">
+                    <h3>📋 Resumo</h3>
+                    <p><strong>Esta extensão é uma ferramenta de automação simples que funciona apenas localmente no seu navegador, não coleta, armazena ou transmite nenhum tipo de dados pessoais ou informações.</strong></p>
+                </div>
             </div>
 
-            <h2>📝 9. Alterações nesta Política</h2>
-            <p>Notificaremos sobre mudanças significativas nesta política através de uma atualização da extensão na Chrome Web Store.</p>
+            <!-- ENGLISH -->
+            <div class="lang-en">
+                <h2>🔒 1. Introduction</h2>
+                <p>This Privacy Policy describes how the "GCP Integrations - Description Unchecker" extension collects, uses, and protects information when you use our Chrome extension.</p>
 
-            <h2>📧 10. Contato</h2>
-            <div class="contact-section">
-                <p><strong>Para questões sobre esta Política de Privacidade, entre em contato através de:</strong></p>
-                <p>📧 rafa17rocha@hotmail.com</p>
-            </div>
+                <h2>📊 2. Information We Collect</h2>
+                
+                <h3>🚫 2.1 Data NOT Collected</h3>
+                <div class="highlight">
+                    <p><span class="no-data-icon">✅</span><strong>Our extension does NOT collect, store, transmit, or share any type of personal data, including:</strong></p>
+                    <ul>
+                        <li>Personal identification information</li>
+                        <li>Browsing data</li>
+                        <li>Cookies</li>
+                        <li>Browsing history</li>
+                        <li>Login information</li>
+                        <li>Google Cloud project data</li>
+                        <li>Any content information from visited pages</li>
+                    </ul>
+                </div>
 
-            <h2>✅ 11. Conformidade</h2>
-            <p>Esta extensão está em conformidade com:</p>
-            <ul>
-                <li>Políticas da Chrome Web Store</li>
-                <li>Regulamentações de privacidade aplicáveis</li>
-                <li>Termos de serviço do Google Cloud Console</li>
-            </ul>
+                <h3>💻 2.2 Local Operation</h3>
+                <p>The extension operates entirely in your local browser and does not send any information to external servers.</p>
 
-            <div class="summary">
-                <h3>📋 Resumo</h3>
-                <p><strong>Esta extensão é uma ferramenta de automação simples que funciona apenas localmente no seu navegador, não coleta, armazena ou transmite nenhum tipo de dados pessoais ou informações.</strong></p>
+                <h2>🔑 3. Permissions Used</h2>
+                
+                <h3>3.1 "scripting" Permission</h3>
+                <p>Used exclusively to execute the automation script on the specified page.</p>
+
+                <h3>3.2 "host_permissions" Permission</h3>
+                <p>Limited only to the domain: <code>https://console.cloud.google.com/integrations/list*</code></p>
+                <p>This permission is necessary for the extension to work only on the Google Cloud Console integrations page.</p>
+
+                <h2>⚙️ 4. Extension Functionality</h2>
+                <p>The extension automates the following actions on the Google Cloud Console integrations page:</p>
+                <ul>
+                    <li>Clicks on the column display options button</li>
+                    <li>Unchecks the "Description" and "Last Modified By" columns</li>
+                    <li>Confirms the changes</li>
+                </ul>
+                <p><strong>All these actions are performed locally in your browser, without data transmission.</strong></p>
+
+                <h2>🌐 5. Third-Party Data Usage</h2>
+                <div class="highlight">
+                    <p><strong>The extension does not use:</strong></p>
+                    <ul>
+                        <li>Analytics or tracking tools</li>
+                        <li>Third-party services</li>
+                        <li>External APIs</li>
+                        <li>Network connections</li>
+                    </ul>
+                </div>
+
+                <h2>💾 6. Data Storage</h2>
+                <p><strong>The extension does not store any data:</strong></p>
+                <ul>
+                    <li>Does not use localStorage</li>
+                    <li>Does not use cookies</li>
+                    <li>Does not maintain data cache</li>
+                    <li>Does not have a database</li>
+                </ul>
+
+                <h2>🤝 7. Information Sharing</h2>
+                <p>We do not share any information because we do not collect any data.</p>
+
+                <h2>🔐 8. Security</h2>
+                <p>The extension is designed with a focus on privacy:</p>
+                <div class="highlight">
+                    <ul>
+                        <li><span class="badge">Local Execution</span> Exclusively local</li>
+                        <li><span class="badge">Zero Transmission</span> No data transmission</li>
+                        <li><span class="badge">Limited Access</span> Only specific Google Cloud Console page</li>
+                        <li><span class="badge">Open Source</span> Auditable code</li>
+                    </ul>
+                </div>
+
+                <h2>📝 9. Changes to This Policy</h2>
+                <p>We will notify about significant changes to this policy through an extension update on the Chrome Web Store.</p>
+
+                <h2>📧 10. Contact</h2>
+                <div class="contact-section">
+                    <p><strong>For questions about this Privacy Policy, contact us at:</strong></p>
+                    <p>📧 rafa17rocha@hotmail.com</p>
+                </div>
+
+                <h2>✅ 11. Compliance</h2>
+                <p>This extension complies with:</p>
+                <ul>
+                    <li>Chrome Web Store policies</li>
+                    <li>Applicable privacy regulations</li>
+                    <li>Google Cloud Console terms of service</li>
+                </ul>
+
+                <div class="summary">
+                    <h3>📋 Summary</h3>
+                    <p><strong>This extension is a simple automation tool that works only locally in your browser, does not collect, store, or transmit any type of personal data or information.</strong></p>
+                </div>
             </div>
         </div>
 
         <div class="footer">
-            <p>2025 - Chrome Extension GCP Integrations - Description Unchecker</p>
+            <p class="lang-pt">2025 - Chrome Extension GCP Integrations - Description Unchecker</p>
+            <p class="lang-en">2025 - Chrome Extension GCP Integrations - Description Unchecker</p>
         </div>
     </div>
+
+    <script>
+        const toggleSwitch = document.getElementById('languageToggle');
+        const ptLabel = document.getElementById('pt-label');
+        const enLabel = document.getElementById('en-label');
+        const body = document.body;
+
+        // Load saved language preference
+        const savedLang = localStorage.getItem('preferredLanguage') || 'pt';
+        if (savedLang === 'en') {
+            switchToEnglish();
+        }
+
+        toggleSwitch.addEventListener('click', function() {
+            if (body.classList.contains('lang-english')) {
+                switchToPortuguese();
+            } else {
+                switchToEnglish();
+            }
+        });
+
+        function switchToEnglish() {
+            body.classList.add('lang-english');
+            toggleSwitch.classList.add('active');
+            ptLabel.classList.remove('active');
+            enLabel.classList.add('active');
+            document.documentElement.lang = 'en';
+            localStorage.setItem('preferredLanguage', 'en');
+        }
+
+        function switchToPortuguese() {
+            body.classList.remove('lang-english');
+            toggleSwitch.classList.remove('active');
+            ptLabel.classList.add('active');
+            enLabel.classList.remove('active');
+            document.documentElement.lang = 'pt-BR';
+            localStorage.setItem('preferredLanguage', 'pt');
+        }
+    </script>
 </body>
 </html> 
